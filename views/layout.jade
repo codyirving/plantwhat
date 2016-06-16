@@ -1,0 +1,17 @@
+doctype html
+html
+  head
+    title= title
+    link(rel='stylesheet', href='/stylesheets/style.css')
+    link(rel='stylesheet', href='/bower_components/bootstrap/dist/css/bootstrap.min.css')
+    script(type='text/javascript', src='http://code.jquery.com/jquery-1.11.1.min.js')
+    script(type='text/javascript', src='/javascripts/backstretch.min.js')
+    script(type='text/javascript', src='/bower_components/bootstrap/dist/js/bootstrap.min.js')
+    meta(name='viewport', content='width=device-width', initial-scale='1')
+    script(type='text/javascript').
+     $(document).ready(function(){
+      $.backstretch("/images/background_flower_orange.jpg", {duration: 300, fade:300});
+     });
+
+  body(role='document')
+    block content

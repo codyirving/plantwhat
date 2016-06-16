@@ -1,0 +1,35 @@
+extends layout
+ 
+block content
+ 
+ div.jumbotron
+  
+    h1 Hi, it's a perfect time to plant!
+   
+    h4 #{cityname}
+    h4  #{enteredzip}
+    
+    div.latlong
+    div.fallfrostdate Average Fall frost date: #{frostFL}
+    div.springfrostdate Average Spring frost date: #{frostSP}
+
+  div.container-database
+    -if(success)
+     
+     -var fulldb = success;
+     -var dbsize = JSON.stringify(success);
+     -var count = 0;
+     //h6 Full Object= #{dbsize}
+     div.row 
+     -for(var i = 0; i < success.length; i++)
+          div.col-md-3
+           div.panel.panel-success
+            div.panel-heading 
+             span.badge #{i+1}
+             //span.badge.id #{(fulldb[i]['_id'])}
+             //span.badge.deletebutton X
+             h4 #{(fulldb[i]['Common Name'])}
+            div.panel-body
+             h6 Weeks relative to frost date to set out: #{(fulldb[i]['Frost Differential MIN'])} to #{(fulldb[i]['Frost Differential MAX'])}
+             h6 Weeks to start indoors before set out date: #{(fulldb[i]['Indoor Start MIN'])} to #{(fulldb[i]['Indoor Start MAX'])}
+             h6 Description: #{(fulldb[i]['Description'])}

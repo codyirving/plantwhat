@@ -1,0 +1,41 @@
+extends layout
+
+block content
+ div.container
+  div.jumbotron
+   
+    div.addplant Fill in information to add new plant.
+     div.enterzip
+      form(action='/newplant', method='post').newplantform
+          p
+          input(id='commonName',type='text',placeholder='Common Plant Name ie: Bell Pepper',name='commonname').newplantfield
+          p
+          input(id='frostDifferential',type='text',placeholder='Days to Plant before or after Frost Date',name='frostdifferential').newplantfield
+          p
+          input(id='indoorStartDaysMIN',type='text',placeholder='Days before plant date to start indoors MIN',name='indoorstartdaysMIN').newplantfield
+          p
+          input(id='indoorStartDaysMAX',type='text',placeholder='Days before plant date to start indoors MAX',name='indoorstartdaysMAX').newplantfield
+          p
+          input(type='submit',value='Add Plant to Database')
+
+  div.container-database
+    -if(success)
+     h3 records: #{success.length}
+     -var fulldb = success;
+     -var dbsize = JSON.stringify(success);
+     -var count = 0;
+     //h6 Full Object = #{dbsize}
+     -for(var j = 0; j < success.length; j++)
+      -if(j % 3 == 0)
+       div.row
+        -for(var i = j; i < (3 + j); i++)
+         -if(i >= success.length) break;
+          div.col-sm-4
+           div.panel.panel-default
+            div.panel-heading 
+             span.badge #{i}
+             span.badge.delete #{(fulldb[i]['_id'])}
+             h4 #{(fulldb[i]['Common Name'])}
+            div.panel-body
+             h6 frost differential: #{JSON.stringify(fulldb[i]['Frost Differential'])}
+             h6 indoor start days: #{JSON.stringify(fulldb[i]['Indoor Start MIN'])} - #{JSON.stringify(fulldb[i]['Indoor Start MAX'])}

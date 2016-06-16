@@ -1,0 +1,18 @@
+.addplant {
+  margin: auto;
+}
+.newplantfield {
+  width: 400px;
+}
+.left {
+  float: left;
+  width: auto;
+}
+.right {
+  float: right;
+  width: auto;
+}
+.welcome {
+  margin: auto;
+  text-align: center;
+}

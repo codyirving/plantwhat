@@ -1,0 +1,35 @@
+extends layout
+
+block content
+  script(type='text/javascript').
+    $(document).ready(function(){
+      $.backstretch("/images/background_flower_orange.jpg", {duration: 300, fade:300});
+      var window_size = $(window).height();
+      var modified_window_size = window_size/4;
+      $('.welcome').css("margin", "auto");
+      $('.container-welcome').css("margin", "auto");
+      $('.container-welcome').css("margin-top", modified_window_size);
+      $('.welcome').css("text-align", "center");
+      $('.enterzip').css("text-align", "center");
+      $(window).resize(function() {
+        window_size = $(window).height() * 0.75;
+        modified_window_size = $(window).height() / 4;
+        $('.welcome').css("width", $(window).width()/4);
+        //$('.welcome').html("WindowSize: " + $(window).height() + " modified_window_size: " + modified_window_size);
+        $('.container-welcome').css("margin-top",modified_window_size);
+      });
+    });
+  div.container-welcome 
+    div.welcome What to Plant Today!?
+     div.message
+      span.label.label-warning #{message}
+    div.enterzip
+      form(action='/signup', method='post')
+        fieldset(data-role='fieldcontain')
+          label(for='zipcode')
+          input(id='zip',type='text',placeholder='Enter Zipcode', name='zipcode')
+          p
+          fieldset(data-role='fieldcontain')
+            span.input-group-btn
+             button(type='submit').btn.btn-success LETS PLANT!
+              //input(type='submit', value='LETS PLANT!')

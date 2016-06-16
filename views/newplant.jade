@@ -1,0 +1,79 @@
+extends layout
+
+block content
+ head
+  script(type='text/javascript', src='/javascripts/manageplants.js')
+ div.container
+  div.panel
+   div.panel-body.panel-primary
+    div.panel-heading Fill in information to add new plant.
+    
+    div.addplant 
+
+      form(action='/newplant', method='post').newplantform
+       
+         div.left
+          div.dbid 
+           input(id='dbID', type='text', name='dbid').newplantfield
+          p
+          input(id='commonName',type='text',placeholder='Common Plant Name ie: Bell Pepper',name='commonname').newplantfield
+          p
+          input(id='frostDifferentialMIN',type='text',placeholder='Days to Plant before or after Frost Date MIN',name='frostdifferentialMIN').newplantfield
+          p
+          input(id='frostDifferentialMAX',type='text',placeholder='Days to Plant before or after Frost Date MAX',name='frostdifferentialMAX').newplantfield
+          p  
+          input(id='indoorStartDaysMIN',type='text',placeholder='Days before plant date to start indoors MIN',name='indoorstartdaysMIN').newplantfield
+          p
+          input(id='indoorStartDaysMAX',type='text',placeholder='Days before plant date to start indoors MAX',name='indoorstartdaysMAX').newplantfield
+         div.left
+          p
+          input(id='description', type='text', placeholder='Plant Descriptions/information', name='description').newplantfield
+          p
+          input(id='imageLink', type='text', placeholder='Image URL', name='imagelink').newplantfield
+          p
+          input(id='wikiLink', type='text', placeholder='Wikipedia URL', name='wikilink').newplantfield
+          p
+          input(id='purchaseLink', type='text', placeholder='Purchase Link ie: amazon', name='purchaselink').newplantfield
+         div.right
+          p.h6.
+           Start Indoors: 
+          input(id='checkbox1', type='checkbox')
+          p.h6.
+           Direct Sow Only (recommended): 
+          input(id='checkbox2', type='checkbox')
+          p.h6.
+           Edible: 
+          input(id='checkbox3', type='checkbox')
+          p.h6.
+           Inedible: 
+          input(id='checkbox4', type='checkbox')
+          p
+          button.btn.btn-primary(role='button', type='submit') CANCEL
+          button.btn.btn-primary(role='button', type='submit') SAVE
+           //input(type='submit',value='Add Plant to Database')
+          
+  div.container-database
+    -if(success)
+     h3 Records:
+     h3.records #{success.length}
+     -var fulldb = success;
+     -var dbsize = JSON.stringify(success);
+     -var count = 0;
+     //h6 Full Object= #{dbsize}
+     div.row 
+      -for(var i = 0; i < success.length; i++)
+          div.col-md-4
+           div.panel.panel-success
+            div.panel-heading 
+             span.badge #{i}
+             span.badge.id #{(fulldb[i]['_id'])}
+             span.glyphicon.glyphicon-ban-circle.deletebutton
+             span.glyphicon.glyphicon-edit.editbutton
+             h4 #{(fulldb[i]['Common Name'])}
+            div.panel-body
+             h6 frost differential: #{JSON.stringify(fulldb[i]['Frost Differential MIN'])} - #{JSON.stringify(fulldb[i]['Frost Differential MAX'])}
+             h6 indoor start days: #{JSON.stringify(fulldb[i]['Indoor Start MIN'])} - #{JSON.stringify(fulldb[i]['Indoor Start MAX'])}
+             h6 description: #{JSON.stringify(fulldb[i]['Description'])}
+             h6 image link: #{JSON.stringify(fulldb[i]['Image Link'])}
+             h6 Wikipedia: #{JSON.stringify(fulldb[i]['Wikipedia Link'])}
+             h6 Buy: #{JSON.stringify(fulldb[i]['Purchase Link'])}
