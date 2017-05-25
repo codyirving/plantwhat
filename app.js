@@ -16,8 +16,8 @@ var logFile = fs.createWriteStream('./myLogFile.log', {flags: 'a'}); //use {flag
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 
-var server_port = process.env.OPENSHIFT_NODEJS_PORT || 8080
-var server_ip_address = process.env.OPENSHIFT_NODEJS_IP || '127.0.0.1'
+var server_port = process.env.PLANTWHAT_SERVICE_PORT || 8080
+var server_ip_address = process.env.PLANTWHAT_PORT_8080_TCP_ADDR || '127.0.0.1'
 server = http.createServer(app);
 server.listen(server_port, server_ip_address, function () {
   console.log( "Listening on " + server_ip_address + ", port " + server_port )
