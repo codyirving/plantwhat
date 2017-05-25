@@ -19,9 +19,7 @@ app.set('view engine', 'jade');
 var server_port = process.env.PLANTWHAT_SERVICE_PORT || 8080
 var server_ip_address = process.env.PLANTWHAT_PORT_8080_TCP_ADDR || '127.0.0.1'
 server = http.createServer(app);
-server.listen(function () {
-  console.log( "Listening on " + server_ip_address + ", port " + server_port + ", NOT:" + process.env.PLANTWHAT_SERVICE_PORT)
-});
+server.listen(8080);
 
 
 
