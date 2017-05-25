@@ -16,7 +16,15 @@ var logFile = fs.createWriteStream('./myLogFile.log', {flags: 'a'}); //use {flag
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 
-http.createServer(app).listen(80);
+var server_port = process.env.OPENSHIFT_NODEJS_PORT || 8080
+var server_ip_address = process.env.OPENSHIFT_NODEJS_IP || '127.0.0.1'
+ 
+http.createServer(app).listen(server_port, server_ip_address, function () {
+  console.log( "Listening on " + server_ip_address + ", port " + server_port )
+});
+
+
+
 // uncomment after placing your favicon in /public
 //app.use(favicon(__dirname + '/public/favicon.ico'));
 app.use(logger('combined'));
